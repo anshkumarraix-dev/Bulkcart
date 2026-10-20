@@ -29,7 +29,7 @@ Build mode: fast
   Learner check: Inspect the terminal output showing Gemini extracting structured prices and bag sizes from broken English and Hindi transcripts into Python models.
   Commit: `Implement Gemini structured extraction with cached fallback`
 
-- [ ] **3. Retro Kirana Dashboard and Live Quote Verdict UI**
+- [x] **3. Retro Kirana Dashboard and Live Quote Verdict UI**
   Becomes usable: A single-page browser dashboard in the Retro Kirana aesthetic where clicking "Load sample round" populates the inputs, "Analyze quotes" ticks off the 4-step checklist, and the full Quote Verdict table renders with rubber-stamp badges and pack plan.
   Why now: Connects the user experience to the backend pipeline, delivering the core visual interaction and the 1-minute demo kernel.
   PRD ref: `prd.md > Screens and Layout`, `prd.md > Look and Feel`, `prd.md > The Core Journey` (steps 1–5)
@@ -39,7 +39,7 @@ Build mode: fast
   Learner check: Open the dashboard in your browser, click "Load sample round", click "Analyze quotes", watch the 4-step checklist, and verify the side-by-side comparison table.
   Commit: `Build Retro Kirana dashboard and live Quote Verdict UI`
 
-- [ ] **4. Pakka Bill Receipt, Simulated Dispatch, and Complete Journey**
+- [x] **4. Pakka Bill Receipt, Simulated Dispatch, and Complete Journey**
   Becomes usable: Clicking "Approve and send" locks the verdict into an animated, perforated Pakka Bill receipt slip with rolling savings total, red "SENT" stamp, clipboard copy, and reset to empty state.
   Why now: Closes the full journey loop from first arrival to final resolution and round reset.
   PRD ref: `prd.md > The Core Journey` (steps 6–7), `prd.md > Features and Behavior > 6. Pakka Bill Resolution`
