@@ -5,7 +5,13 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 
-from models import SampleRoundResponse, DemandItem, HouseholdOrder
+from models import (
+    SampleRoundResponse, DemandItem, HouseholdOrder,
+    AnalyzeRequest, VerdictResponse
+)
+from services.llm_extractor import extract_merchant_quotes
+from services.math_engine import evaluate_merchant_quotes
+from services.pack_optimizer import optimize_demand_packs
 
 # Load environment variables
 load_dotenv()
@@ -51,3 +57,62 @@ def get_sample_round():
         households=households,
         sample_quotes=data["sample_quotes"]
     )
+
+@app.post("/api/analyze", response_model=VerdictResponse)
+def analyze_quotes(req: AnalyzeRequest):
+    # 1. Fetch current demand totals
+    households_file = os.path.join(DATA_DIR, "households.json")
+    demand = {"rice": 710, "atta": 425, "oil": 150}
+    total_households = 26
+    if os.path.exists(households_file):
+        try:
+            with open(households_file, "r", encoding="utf-8") as f:
+                d = json.load(f)
+                demand = d.get("demand_totals", demand)
+                total_households = d.get("total_households", 26)
+        except Exception:
+            pass
+
+    # 2. Extract quotes with Gemini (with cached fallback safety)
+    extraction, used_fallback, is_edited = extract_merchant_quotes(
+        merchant_a=req.merchant_a_text,
+        merchant_b=req.merchant_b_text,
+        merchant_c=req.merchant_c_text,
+        demand=demand
+    )
+
+    fallback_warning = None
+    if used_fallback and is_edited:
+        fallback_warning = "API unavailable or rate-limited. Showing saved sample result (custom edits could not be analyzed)."
+
+    # 3. Deterministic math engine evaluates Mandi badges & savings vs retail
+    (
+        audits, best_id, best_name,
+        retail_cost, best_cost, saving, saving_pct, per_home
+    ) = evaluate_merchant_quotes(
+        quotes=extraction.quotes,
+        demand=demand,
+        total_households=total_households
+    )
+
+    # 4. Pack optimizer calculates zero-waste sack breakdowns
+    best_quote = next((q for q in extraction.quotes if q.merchant_id == best_id), extraction.quotes[0] if extraction.quotes else None)
+    best_items = best_quote.items if best_quote else []
+    pack_plans = optimize_demand_packs(demand, best_items)
+
+    return VerdictResponse(
+        best_merchant_id=best_id,
+        best_merchant_name=best_name,
+        total_retail_cost=retail_cost,
+        best_merchant_cost=best_cost,
+        total_estimated_saving=saving,
+        saving_percentage=saving_pct,
+        per_household_saving=per_home,
+        used_fallback=used_fallback,
+        fallback_warning=fallback_warning,
+        pack_plans=pack_plans,
+        merchant_audits=audits,
+        quotes=extraction.quotes,
+        counter_offer_draft=extraction.counter_offer_draft
+    )
+
