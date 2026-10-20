@@ -1,0 +1,20 @@
+{
+  "baseline_source": "Neighborhood Supermarket & Quick Commerce Average",
+  "rates": {
+    "rice": {
+      "price_per_unit": 62.0,
+      "unit": "kg",
+      "commodity": "Branded Sona Masoori Rice (1kg/5kg retail packs)"
+    },
+    "atta": {
+      "price_per_unit": 44.0,
+      "unit": "kg",
+      "commodity": "Chakki Fresh Atta (5kg/10kg retail packs)"
+    },
+    "oil": {
+      "price_per_unit": 162.0,
+      "unit": "L",
+      "commodity": "Refined Sunflower Oil (1L pouch/bottle)"
+    }
+  }
+}

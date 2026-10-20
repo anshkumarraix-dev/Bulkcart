@@ -1,0 +1,21 @@
+{
+  "benchmark_source": "Azadpur Mandi / APMC Daily Bulletin (Sample Data)",
+  "date": "2026-10-20",
+  "rates": {
+    "rice": {
+      "price_per_unit": 48.0,
+      "unit": "kg",
+      "commodity": "Sona Masoori Raw Rice"
+    },
+    "atta": {
+      "price_per_unit": 34.0,
+      "unit": "kg",
+      "commodity": "Chakki Fresh Sharbati Atta"
+    },
+    "oil": {
+      "price_per_unit": 132.0,
+      "unit": "L",
+      "commodity": "Refined Sunflower Oil"
+    }
+  }
+}

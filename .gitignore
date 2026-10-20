@@ -1,0 +1,14 @@
+# Personal learner profile for Devpost Learn
+/devpost/learner-profile.md
+
+# Environment / credentials
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+

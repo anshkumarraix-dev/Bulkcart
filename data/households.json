@@ -1,0 +1,43 @@
+{
+  "society_name": "Gulmohar Enclave RWA",
+  "total_households": 26,
+  "round_date": "Week 42 - October 2026",
+  "demand_totals": {
+    "rice": 710,
+    "atta": 425,
+    "oil": 150
+  },
+  "households": [
+    {"flat_no": "A-101", "resident_name": "Sharma family", "rice_kg": 30, "atta_kg": 20, "oil_l": 5},
+    {"flat_no": "A-102", "resident_name": "Verma family", "rice_kg": 25, "atta_kg": 15, "oil_l": 5},
+    {"flat_no": "A-201", "resident_name": "Iyer family", "rice_kg": 30, "atta_kg": 15, "oil_l": 5},
+    {"flat_no": "A-202", "resident_name": "Kulkarni family", "rice_kg": 25, "atta_kg": 20, "oil_l": 5},
+    {"flat_no": "A-301", "resident_name": "Banerjee family", "rice_kg": 25, "atta_kg": 15, "oil_l": 5},
+    {"flat_no": "A-302", "resident_name": "Patel family", "rice_kg": 25, "atta_kg": 20, "oil_l": 10},
+    {"flat_no": "B-101", "resident_name": "Gupta family", "rice_kg": 30, "atta_kg": 15, "oil_l": 5},
+    {"flat_no": "B-102", "resident_name": "Reddy family", "rice_kg": 35, "atta_kg": 10, "oil_l": 5},
+    {"flat_no": "B-201", "resident_name": "Nair family", "rice_kg": 30, "atta_kg": 15, "oil_l": 5},
+    {"flat_no": "B-202", "resident_name": "Singh family", "rice_kg": 20, "atta_kg": 20, "oil_l": 5},
+    {"flat_no": "B-301", "resident_name": "Deshmukh family", "rice_kg": 25, "atta_kg": 20, "oil_l": 5},
+    {"flat_no": "B-302", "resident_name": "Choudhury family", "rice_kg": 30, "atta_kg": 15, "oil_l": 5},
+    {"flat_no": "C-101", "resident_name": "Mehta family", "rice_kg": 25, "atta_kg": 20, "oil_l": 5},
+    {"flat_no": "C-102", "resident_name": "Rao family", "rice_kg": 35, "atta_kg": 10, "oil_l": 5},
+    {"flat_no": "C-201", "resident_name": "Bhat family", "rice_kg": 25, "atta_kg": 15, "oil_l": 5},
+    {"flat_no": "C-202", "resident_name": "Khan family", "rice_kg": 30, "atta_kg": 20, "oil_l": 10},
+    {"flat_no": "C-301", "resident_name": "Joshi family", "rice_kg": 25, "atta_kg": 20, "oil_l": 5},
+    {"flat_no": "C-302", "resident_name": "Pillai family", "rice_kg": 30, "atta_kg": 10, "oil_l": 5},
+    {"flat_no": "D-101", "resident_name": "Kapoor family", "rice_kg": 20, "atta_kg": 20, "oil_l": 5},
+    {"flat_no": "D-102", "resident_name": "Menon family", "rice_kg": 25, "atta_kg": 10, "oil_l": 5},
+    {"flat_no": "D-201", "resident_name": "Agarwal family", "rice_kg": 25, "atta_kg": 20, "oil_l": 10},
+    {"flat_no": "D-202", "resident_name": "Bose family", "rice_kg": 30, "atta_kg": 15, "oil_l": 5},
+    {"flat_no": "D-301", "resident_name": "Gowda family", "rice_kg": 30, "atta_kg": 15, "oil_l": 5},
+    {"flat_no": "D-302", "resident_name": "Mishra family", "rice_kg": 20, "atta_kg": 15, "oil_l": 5},
+    {"flat_no": "E-101", "resident_name": "Saxena family", "rice_kg": 25, "atta_kg": 20, "oil_l": 5},
+    {"flat_no": "E-102", "resident_name": "Chatterjee family", "rice_kg": 35, "atta_kg": 15, "oil_l": 10}
+  ],
+  "sample_quotes": {
+    "merchant_a": "Hello sir, Bharat Traders here. Sona Masoori Rice we can give at 56 per kg in 25kg bags (1400 per bag). Atta Sharbati 38 rs/kg in 25kg packing (950 per bag). Sunflower oil 142 per Ltr (15L tin 2130). Minimum order total 500kg. Delivery this Thursday afternoon. Payment 50% advance rest on delivery.",
+    "merchant_b": "Kisan Wholesale Mandi Price List:\n1. Rice Sona Masoori: Rs 52/kg | Packs: 25kg bag (Rs 1300), 10kg bag (Rs 530)\n2. Atta Chakki: Rs 36/kg | Packs: 25kg bag (Rs 900), 10kg bag (Rs 370)\n3. Refined Oil: Rs 140/L | Pack: 15L tin (Rs 2100)\n* Delivery: Saturday morning to society gate.\n* Payment: 100% on delivery cash or UPI. Minimum 20 bags.",
+    "merchant_c": "Namaste Sharma ji, Krishna Traders se Ramesh bol raha hoon. Society ka bulk order hai to badhiya rate lagayenge. Sona Masoori chawal 50 rupaye kg padega, 25 kg ka katta 1250 aur 10 kg ka 500 me. Sharbati atta 35 rupaye kg, 25 kg bag 875 me. Tel 136 rupaye litre, 15 litre tin 2040. Delivery Saturday ko society gate pe free utar denge. Payment delivery ke baad check karke UPI kar dena. Mal ekdum naya hai."
+  }
+}

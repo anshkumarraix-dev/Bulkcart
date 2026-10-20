@@ -1,0 +1,168 @@
+{
+  "best_merchant_id": "merchant_c",
+  "best_merchant_name": "Krishna Traders (Ramesh ji)",
+  "total_retail_cost": 87020.0,
+  "best_merchant_cost": 70775.0,
+  "total_estimated_saving": 16245.0,
+  "saving_percentage": 18.7,
+  "per_household_saving": 625.0,
+  "used_fallback": true,
+  "fallback_warning": null,
+  "pack_plans": [
+    {
+      "item_name": "rice",
+      "demand_qty": 710,
+      "unit": "kg",
+      "sacks_breakdown": "28 × 25 kg + 1 × 10 kg bags",
+      "total_delivered_qty": 710,
+      "waste_qty": 0
+    },
+    {
+      "item_name": "atta",
+      "demand_qty": 425,
+      "unit": "kg",
+      "sacks_breakdown": "17 × 25 kg bags",
+      "total_delivered_qty": 425,
+      "waste_qty": 0
+    },
+    {
+      "item_name": "oil",
+      "demand_qty": 150,
+      "unit": "L",
+      "sacks_breakdown": "10 × 15 L tins",
+      "total_delivered_qty": 150,
+      "waste_qty": 0
+    }
+  ],
+  "merchant_audits": [
+    {
+      "merchant_id": "merchant_a",
+      "merchant_name": "Bharat Traders",
+      "total_cost": 77210.0,
+      "badge_label": "MEHENGA (+12%)",
+      "badge_type": "expensive",
+      "is_best_pick": false,
+      "summary_notes": "Prices 8-16% over Mandi rates. 50% advance payment required."
+    },
+    {
+      "merchant_id": "merchant_b",
+      "merchant_name": "Kisan Wholesale",
+      "total_cost": 73220.0,
+      "badge_label": "MEHENGA (+7%)",
+      "badge_type": "expensive",
+      "is_best_pick": false,
+      "summary_notes": "Good rates but 6-8% above wholesale benchmarks. Strict cash/UPI on delivery."
+    },
+    {
+      "merchant_id": "merchant_c",
+      "merchant_name": "Krishna Traders",
+      "total_cost": 70775.0,
+      "badge_label": "SAHI BHAV",
+      "badge_type": "fair",
+      "is_best_pick": true,
+      "summary_notes": "Closest to Mandi benchmarks (within 3-4%). Free delivery to society gate, pay after check."
+    }
+  ],
+  "quotes": [
+    {
+      "merchant_id": "merchant_a",
+      "merchant_name": "Bharat Traders",
+      "delivery_date": "Thursday afternoon",
+      "payment_terms": "50% advance, rest on delivery",
+      "conditions": "Minimum order 500kg total",
+      "items": [
+        {
+          "item_name": "rice",
+          "price_per_unit": 56.0,
+          "unit": "kg",
+          "pack_sizes_offered": [25],
+          "price_per_pack": [1400.0],
+          "moq": 500
+        },
+        {
+          "item_name": "atta",
+          "price_per_unit": 38.0,
+          "unit": "kg",
+          "pack_sizes_offered": [25],
+          "price_per_pack": [950.0],
+          "moq": null
+        },
+        {
+          "item_name": "oil",
+          "price_per_unit": 142.0,
+          "unit": "L",
+          "pack_sizes_offered": [15],
+          "price_per_pack": [2130.0],
+          "moq": null
+        }
+      ]
+    },
+    {
+      "merchant_id": "merchant_b",
+      "merchant_name": "Kisan Wholesale",
+      "delivery_date": "Saturday morning",
+      "payment_terms": "100% on delivery cash or UPI",
+      "conditions": "Minimum 20 bags",
+      "items": [
+        {
+          "item_name": "rice",
+          "price_per_unit": 52.0,
+          "unit": "kg",
+          "pack_sizes_offered": [25, 10],
+          "price_per_pack": [1300.0, 530.0],
+          "moq": null
+        },
+        {
+          "item_name": "atta",
+          "price_per_unit": 36.0,
+          "unit": "kg",
+          "pack_sizes_offered": [25, 10],
+          "price_per_pack": [900.0, 370.0],
+          "moq": null
+        },
+        {
+          "item_name": "oil",
+          "price_per_unit": 140.0,
+          "unit": "L",
+          "pack_sizes_offered": [15],
+          "price_per_pack": [2100.0],
+          "moq": 20
+        }
+      ]
+    },
+    {
+      "merchant_id": "merchant_c",
+      "merchant_name": "Krishna Traders",
+      "delivery_date": "Saturday free delivery to gate",
+      "payment_terms": "UPI after delivery inspection",
+      "conditions": "Fresh crop guaranteed",
+      "items": [
+        {
+          "item_name": "rice",
+          "price_per_unit": 50.0,
+          "unit": "kg",
+          "pack_sizes_offered": [25, 10],
+          "price_per_pack": [1250.0, 500.0],
+          "moq": null
+        },
+        {
+          "item_name": "atta",
+          "price_per_unit": 35.0,
+          "unit": "kg",
+          "pack_sizes_offered": [25],
+          "price_per_pack": [875.0],
+          "moq": null
+        },
+        {
+          "item_name": "oil",
+          "price_per_unit": 136.0,
+          "unit": "L",
+          "pack_sizes_offered": [15],
+          "price_per_pack": [2040.0],
+          "moq": null
+        }
+      ]
+    }
+  ],
+  "counter_offer_draft": "Namaste Ramesh ji (Krishna Traders),\nGulmohar Enclave RWA ki taraf se order confirm karne ke liye taiyar hain:\n- Sona Masoori Rice: 710 kg (28 katta of 25kg + 1 bag of 10kg)\n- Sharbati Atta: 425 kg (17 katta of 25kg)\n- Sunflower Oil: 150 L (10 tins of 15L)\n\nKul order lagbhag ₹70,775 ka hai. Kyunki hum har mahine ka niyamit bulk order aapko dene ka plan kar rahe hain, kya aap kul bill pe 2% volume concession (₹69,350 total) kar payenge? Saturday subah gate delivery pakki rakhein.\n\nDhanyavaad,\nCoordinator, Gulmohar Enclave"
+}
