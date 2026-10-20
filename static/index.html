@@ -1,11 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Neighborhood Buying Agent</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gulmohar Enclave RWA — AI Neighborhood Buying Agent</title>
+  
+  <!-- Google Fonts for Retro Kirana Aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Rozha+One&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Neighborhood Buying Agent</h1>
-    <p>Loading app...</p>
+  <!-- Retro Awning Border -->
+  <div class="zigzag-awning"></div>
+
+  <div class="kirana-app-container">
+    
+    <!-- Header / Shop Signboard -->
+    <header class="kirana-header">
+      <div class="signboard-plate">
+        <span class="est-tag">GULMOHAR ENCLAVE RWA • RETAIL ESCAPE DISPATCH</span>
+        <h1 class="signboard-title">AI BUYING AGENT</h1>
+        <p class="signboard-tagline">“Societies buy like wholesalers • Save visibly every single week”</p>
+      </div>
+    </header>
+
+    <!-- Top Action / Control Banner -->
+    <section class="round-control-banner">
+      <div class="banner-content">
+        <div class="banner-text">
+          <span class="badge-status-dot active"></span>
+          <span class="banner-label">Active Round: <strong>Week 42 Staples (Rice, Atta, Oil)</strong></span>
+        </div>
+        <div class="banner-actions">
+          <button id="load-sample-btn" class="kirana-btn btn-primary">
+            <span class="btn-icon">📦</span> Load Sample Round
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Workspace Grid: Demand on Left, Quotes on Right -->
+    <main class="workspace-grid">
+      
+      <!-- Panel 1: Demand Summary -->
+      <section class="kirana-card demand-card" id="demand-card">
+        <div class="card-header">
+          <h2 class="card-title">1. Consolidated Society Demand</h2>
+          <span id="demand-badge" class="pill-badge pill-neutral">Waiting</span>
+        </div>
+        
+        <div id="demand-empty-state" class="empty-state-placeholder">
+          <p class="placeholder-icon">📋</p>
+          <p class="placeholder-text">No active round data loaded yet.</p>
+          <p class="placeholder-sub">Click <strong>"Load Sample Round"</strong> above to populate 26 verified household orders.</p>
+        </div>
+
+        <div id="demand-loaded-content" class="demand-content hidden">
+          <div class="society-meta-strip">
+            <span id="society-name-display">Gulmohar Enclave RWA</span>
+            <span class="meta-separator">•</span>
+            <span id="household-count-display">26 Participating Homes</span>
+          </div>
+
+          <div class="demand-pills-row">
+            <div class="demand-stat-pill">
+              <span class="stat-name">Sona Masoori Rice</span>
+              <span class="stat-num" id="demand-rice-qty">710 <small>kg</small></span>
+              <span class="stat-retail-ref">Retail: ₹62/kg</span>
+            </div>
+            <div class="demand-stat-pill">
+              <span class="stat-name">Sharbati Atta</span>
+              <span class="stat-num" id="demand-atta-qty">425 <small>kg</small></span>
+              <span class="stat-retail-ref">Retail: ₹44/kg</span>
+            </div>
+            <div class="demand-stat-pill">
+              <span class="stat-name">Sunflower Oil</span>
+              <span class="stat-num" id="demand-oil-qty">150 <small>L</small></span>
+              <span class="stat-retail-ref">Retail: ₹162/L</span>
+            </div>
+          </div>
+
+          <details class="household-list-accordion">
+            <summary class="accordion-toggle">View 26 Individual Household Orders (Audit Trail)</summary>
+            <div id="households-table-container" class="accordion-body">
+              <table class="household-mini-table">
+                <thead>
+                  <tr>
+                    <th>Flat</th>
+                    <th>Resident</th>
+                    <th>Rice</th>
+                    <th>Atta</th>
+                    <th>Oil</th>
+                  </tr>
+                </thead>
+                <tbody id="household-table-body">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Panel 2: Raw Merchant Quote Inputs -->
+      <section class="kirana-card quotes-card" id="quotes-card">
+        <div class="card-header">
+          <h2 class="card-title">2. Inbound Merchant Quotes</h2>
+          <span id="quotes-badge" class="pill-badge pill-neutral">3 Messy Replies</span>
+        </div>
+
+        <div id="inputs-changed-banner" class="alert-notice alert-warning hidden">
+          ⚠️ <strong>Quotes modified:</strong> You edited merchant text. Click "Analyze Quotes" to re-run reasoning.
+        </div>
+
+        <div class="quotes-input-container">
+          <!-- Merchant A -->
+          <div class="merchant-input-box">
+            <div class="input-box-label">
+              <span class="label-merchant">Merchant A: Bharat Traders</span>
+              <span class="label-format tag-en">Broken English</span>
+            </div>
+            <textarea id="merchant-a-text" rows="3" placeholder="Waiting for quote text..."></textarea>
+          </div>
+
+          <!-- Merchant B -->
+          <div class="merchant-input-box">
+            <div class="input-box-label">
+              <span class="label-merchant">Merchant B: Kisan Wholesale</span>
+              <span class="label-format tag-list">Raw Price List</span>
+            </div>
+            <textarea id="merchant-b-text" rows="3" placeholder="Waiting for quote text..."></textarea>
+          </div>
+
+          <!-- Merchant C -->
+          <div class="merchant-input-box">
+            <div class="input-box-label">
+              <span class="label-merchant">Merchant C: Krishna Traders</span>
+              <span class="label-format tag-hi">Hindi Voice Note Transcript</span>
+            </div>
+            <textarea id="merchant-c-text" rows="3" class="hindi-text" placeholder="Waiting for quote text..."></textarea>
+          </div>
+        </div>
+
+        <div class="action-trigger-bar">
+          <button id="analyze-btn" class="kirana-btn btn-action" disabled>
+            <span class="btn-icon">⚡</span> Analyze Quotes with AI
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Panel 3: Quote Verdict & Decision Engine -->
+    <section class="kirana-card verdict-card" id="verdict-card">
+      <div class="card-header">
+        <h2 class="card-title">3. AI Quote Verdict & Decision</h2>
+        <span class="benchmark-data-tag">Sample benchmark data (APMC Mandi)</span>
+      </div>
+
+      <!-- State: Empty Verdict -->
+      <div id="verdict-empty-state" class="empty-state-placeholder">
+        <p class="placeholder-icon">⚖️</p>
+        <p class="placeholder-text">Your Quote Verdict will appear here.</p>
+        <p class="placeholder-sub">Click "Analyze Quotes with AI" to extract unstructured terms, audit Mandi prices, and optimize bulk sacks.</p>
+      </div>
+
+      <!-- State: Staged 4-Step Progress Checklist -->
+      <div id="verdict-loading-state" class="staged-checklist-container hidden">
+        <h3 class="checklist-title">Reasoning Pipeline in Progress...</h3>
+        <ul class="progress-checklist">
+          <li id="step-1" class="checklist-item pending">
+            <span class="step-indicator"></span>
+            <span class="step-label">Reading and parsing merchant replies (Broken English, Hindi, Price lists)</span>
+          </li>
+          <li id="step-2" class="checklist-item pending">
+            <span class="step-indicator"></span>
+            <span class="step-label">Checking unit prices against APMC Mandi wholesale benchmarks</span>
+          </li>
+          <li id="step-3" class="checklist-item pending">
+            <span class="step-indicator"></span>
+            <span class="step-label">Solving zero-waste pack combinations for 710 kg, 425 kg, 150 L</span>
+          </li>
+          <li id="step-4" class="checklist-item pending">
+            <span class="step-indicator"></span>
+            <span class="step-label">Drafting volume-leveraged counter-offer to best merchant</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- State: Verdict Results Display -->
+      <div id="verdict-results" class="verdict-results-container hidden">
+        
+        <!-- Offline / Fallback Warning -->
+        <div id="fallback-disclaimer" class="alert-notice alert-info hidden">
+          ℹ️ <strong>Offline Demo:</strong> Using verified fallback result (<span id="fallback-reason-text">API unavailable</span>).
+        </div>
+
+        <!-- Headline Strip -->
+        <div class="headline-verdict-strip">
+          <div class="headline-main">
+            <span class="headline-kicker">BEST VERDICT PICK</span>
+            <h3 class="headline-merchant" id="verdict-best-merchant-name">Krishna Traders (Merchant C)</h3>
+          </div>
+          <div class="headline-savings-badge">
+            <span class="savings-kicker">ESTIMATED SOCIETY SAVINGS</span>
+            <div class="savings-amount">
+              <span class="curr-sign">₹</span><span id="verdict-total-saving">16,245</span>
+              <span class="savings-pct" id="verdict-saving-pct">(18.7% cut)</span>
+            </div>
+            <span class="household-avg" id="verdict-per-home-saving">Avg ₹625 saved per home across 26 flats</span>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="table-responsive-wrapper">
+          <table class="verdict-comparison-table" id="comparison-table">
+            <thead>
+              <tr>
+                <th class="col-metric">Item / Parameter</th>
+                <th class="col-merchant" id="col-head-a">Merchant A<br><small>Bharat Traders</small></th>
+                <th class="col-merchant" id="col-head-b">Merchant B<br><small>Kisan Wholesale</small></th>
+                <th class="col-merchant best-pick-col" id="col-head-c">
+                  <div class="crown-tag">RECOMMENDED PICK</div>
+                  Merchant C<br><small>Krishna Traders</small>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Stamp Row -->
+              <tr class="row-stamp">
+                <td class="cell-label">Audit Verdict</td>
+                <td id="stamp-merchant-a"><div class="rubber-stamp stamp-expensive">MEHENGA (+12%)</div></td>
+                <td id="stamp-merchant-b"><div class="rubber-stamp stamp-expensive">MEHENGA (+7%)</div></td>
+                <td id="stamp-merchant-c" class="best-pick-col"><div class="rubber-stamp stamp-fair">SAHI BHAV</div></td>
+              </tr>
+              <!-- Rice Price -->
+              <tr>
+                <td class="cell-label">Rice (710 kg)</td>
+                <td id="price-rice-a">₹56/kg <small>(25kg bags)</small></td>
+                <td id="price-rice-b">₹52/kg <small>(25k/10k bags)</small></td>
+                <td id="price-rice-c" class="best-pick-col"><strong>₹50/kg</strong> <small>(25k/10k bags)</small></td>
+              </tr>
+              <!-- Atta Price -->
+              <tr>
+                <td class="cell-label">Atta (425 kg)</td>
+                <td id="price-atta-a">₹38/kg <small>(25kg bags)</small></td>
+                <td id="price-atta-b">₹36/kg <small>(25k/10k bags)</small></td>
+                <td id="price-atta-c" class="best-pick-col"><strong>₹35/kg</strong> <small>(25kg bags)</small></td>
+              </tr>
+              <!-- Oil Price -->
+              <tr>
+                <td class="cell-label">Oil (150 L)</td>
+                <td id="price-oil-a">₹142/L <small>(15L tin)</small></td>
+                <td id="price-oil-b">₹140/L <small>(15L tin)</small></td>
+                <td id="price-oil-c" class="best-pick-col"><strong>₹136/L</strong> <small>(15L tin)</small></td>
+              </tr>
+              <!-- Delivery Schedule -->
+              <tr>
+                <td class="cell-label">Delivery Schedule</td>
+                <td id="delivery-a">Thursday afternoon</td>
+                <td id="delivery-b">Saturday morning to gate</td>
+                <td id="delivery-c" class="best-pick-col">Saturday free gate delivery</td>
+              </tr>
+              <!-- Payment Terms -->
+              <tr>
+                <td class="cell-label">Payment Terms</td>
+                <td id="terms-a">50% advance, rest on del.</td>
+                <td id="terms-b">100% on delivery cash/UPI</td>
+                <td id="terms-c" class="best-pick-col">UPI after delivery check</td>
+              </tr>
+              <!-- Conditions / Notes -->
+              <tr>
+                <td class="cell-label">Conditions / MOQ</td>
+                <td id="cond-a">MOQ: 500kg total</td>
+                <td id="cond-b">Min 20 bags</td>
+                <td id="cond-c" class="best-pick-col">Fresh crop guaranteed</td>
+              </tr>
+              <!-- Total Cost Row -->
+              <tr class="row-total-cost">
+                <td class="cell-label">Round Total Cost</td>
+                <td id="total-cost-a">₹77,210</td>
+                <td id="total-cost-b">₹73,220</td>
+                <td id="total-cost-c" class="best-pick-col highlighted-total">₹70,775</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Two Column Details: Pack Optimizer & Counter-Offer -->
+        <div class="verdict-sub-grid">
+          
+          <!-- Zero Waste Pack Plan -->
+          <div class="kirana-sub-card pack-card">
+            <h4 class="sub-card-title">📦 Zero-Waste Pack Optimizer</h4>
+            <p class="sub-card-desc">Cheapest sack combination to fulfill exact society demand without extra waste:</p>
+            <div id="pack-plans-list" class="pack-plans-container">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Counter-Offer Box -->
+          <div class="kirana-sub-card counter-card">
+            <div class="counter-header">
+              <h4 class="sub-card-title">🤝 AI Volume Counter-Offer Draft</h4>
+              <span class="editable-hint">Editable before approving</span>
+            </div>
+            <textarea id="counter-offer-textarea" class="counter-textarea" rows="6"></textarea>
+          </div>
+        </div>
+
+        <!-- Resolution Action Bar -->
+        <div class="resolution-bar">
+          <button id="approve-send-btn" class="kirana-btn btn-success btn-large">
+            <span class="btn-icon">✅</span> Approve & Generate Pakka Bill
+          </button>
+        </div>
+
+      </div>
+
+      <!-- State: Pakka Bill Receipt Resolution -->
+      <div id="pakka-bill-container" class="pakka-bill-wrapper hidden">
+        <div class="pakka-bill-slip">
+          <!-- Perforated Top Edge -->
+          <div class="perforated-edge"></div>
+
+          <div class="bill-inner-content">
+            <div class="bill-shop-header">
+              <span class="bill-rwa-badge">OFFICIAL RESIDENTIAL BILL-BOOK</span>
+              <h2 class="bill-title">PAKKA BILL & VENDOR DISPATCH</h2>
+              <p class="bill-meta" id="bill-date-society">Gulmohar Enclave RWA • Round: October 2026</p>
+            </div>
+
+            <!-- Red Simulated Stamp -->
+            <div class="rubber-stamp stamp-sent-red">SENT TO MERCHANT C (Simulated)</div>
+
+            <div class="bill-divider-dash"></div>
+
+            <table class="bill-items-table">
+              <thead>
+                <tr>
+                  <th>Item Particulars</th>
+                  <th>Quantity & Bulk Sacks</th>
+                  <th>Rate</th>
+                  <th class="text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="bill-items-body">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+
+            <div class="bill-divider-dash"></div>
+
+            <div class="bill-totals-area">
+              <div class="bill-retail-compare">
+                <span>Neighborhood Supermarket Retail Baseline:</span>
+                <span class="strike-through" id="bill-retail-total">₹87,020</span>
+              </div>
+              <div class="bill-final-row">
+                <span class="bill-final-label">Wholesale Negotiated Net Amount:</span>
+                <span class="bill-final-num" id="bill-wholesale-total">₹70,775</span>
+              </div>
+              <div class="bill-savings-banner">
+                <span class="savings-callout">TOTAL SOCIETY SAVINGS:</span>
+                <span class="savings-huge-text" id="bill-savings-text">YOU SAVED ₹16,245 (18.7%)</span>
+                <span class="savings-subtext" id="bill-avg-home-text">Average ₹625 saved per household across 26 flats</span>
+              </div>
+            </div>
+
+            <div class="bill-footer">
+              <p class="thank-you">Dhanyavaad! • Neighborhood Solidarity in Action</p>
+              <p class="bill-note">Note: Delivery scheduled for Saturday morning at Society Gate. Payment via UPI after batch inspection.</p>
+            </div>
+          </div>
+
+          <!-- Perforated Bottom Edge -->
+          <div class="perforated-edge bottom"></div>
+        </div>
+
+        <div class="bill-actions-row">
+          <button id="copy-offer-btn" class="kirana-btn btn-secondary">
+            📋 Copy Counter-Offer Text
+          </button>
+          <button id="view-verdict-toggle-btn" class="kirana-btn btn-outline">
+            🔍 View Full Audit Verdict
+          </button>
+          <button id="reset-round-btn" class="kirana-btn btn-primary">
+            🔄 Start a New Round
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <script src="/static/app.js"></script>
 </body>
 </html>
