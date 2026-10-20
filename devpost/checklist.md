@@ -51,7 +51,7 @@ Build mode: fast
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — Slice 2 (Testing Gemini structured extraction output and fallback)
+- [x] Early usable behavior explored — Slice 2 (Testing Gemini structured extraction output and fallback)
 - [ ] Final kick-the-tires exploration and feedback completed — Slice 4 (Full end-to-end walkthrough)
 
 ## Final Review
