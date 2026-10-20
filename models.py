@@ -2,24 +2,24 @@ from typing import List, Optional
 from pydantic import BaseModel, Field
 
 class QuoteItem(BaseModel):
-    item_name: str = Field(description="Normalized commodity name: rice, atta, or oil")
-    price_per_unit: float = Field(description="Price per kg or L")
-    unit: str = Field(description="kg or L")
-    pack_sizes_offered: List[int] = Field(default_factory=list, description="Available sack/tin sizes e.g. [25, 10]")
-    price_per_pack: List[float] = Field(default_factory=list, description="Price per corresponding pack size")
+    item_name: str = Field(default="item", description="Normalized commodity name: rice, atta, or oil")
+    price_per_unit: float = Field(default=0.0, description="Price per kg or L")
+    unit: str = Field(default="kg", description="kg or L")
+    pack_sizes_offered: Optional[List[int]] = Field(default_factory=list, description="Available sack/tin sizes e.g. [25, 10]")
+    price_per_pack: Optional[List[float]] = Field(default_factory=list, description="Price per corresponding pack size")
     moq: Optional[int] = Field(default=None, description="Minimum order quantity in units, or null")
 
 class MerchantQuote(BaseModel):
     merchant_id: str = Field(description="merchant_a, merchant_b, or merchant_c")
-    merchant_name: str
+    merchant_name: str = Field(default="Merchant")
     delivery_date: Optional[str] = None
     payment_terms: Optional[str] = None
     conditions: Optional[str] = None
-    items: List[QuoteItem]
+    items: List[QuoteItem] = Field(default_factory=list)
 
 class ExtractionResponse(BaseModel):
-    quotes: List[MerchantQuote]
-    counter_offer_draft: str
+    quotes: List[MerchantQuote] = Field(default_factory=list)
+    counter_offer_draft: str = Field(default="")
 
 class PackPlanItem(BaseModel):
     item_name: str
@@ -58,9 +58,9 @@ class SampleRoundResponse(BaseModel):
     sample_quotes: dict
 
 class AnalyzeRequest(BaseModel):
-    merchant_a_text: str
-    merchant_b_text: str
-    merchant_c_text: str
+    merchant_a_text: str = ""
+    merchant_b_text: str = ""
+    merchant_c_text: str = ""
 
 class VerdictResponse(BaseModel):
     best_merchant_id: str

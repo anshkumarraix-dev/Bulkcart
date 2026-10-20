@@ -9,7 +9,7 @@ Build mode: fast
 
 ## Slices
 
-- [ ] **1. Scaffolding, Seed Baselines, and Deterministic Math Engine**
+- [x] **1. Scaffolding, Seed Baselines, and Deterministic Math Engine**
   Becomes usable: A running FastAPI server serving seeded demand data (`/api/sample-round`), plus an independently testable Python engine that solves zero-waste pack combinations and evaluates wholesale benchmarks.
   Why now: Bootstrapping lives inside slice one. It establishes the project files, tests the learner's warm-up (pack optimizer math), and provides the baseline data everything else depends on.
   PRD ref: `prd.md > Features and Behavior > 1. Demand & Quote Loading`, `3. Seeded Baselines & Deterministic Math Engine`, `4. Zero-Waste Pack-Size Optimizer`
@@ -19,7 +19,7 @@ Build mode: fast
   Learner check: Visit `http://127.0.0.1:8000/api/sample-round` in your browser and confirm the 26-home demand (710 kg rice, 425 kg atta, 150 L oil) loads cleanly as JSON.
   Commit: `Scaffold project and implement deterministic math and pack solver`
 
-- [ ] **2. Gemini Structured Quote Extraction and Resilient Fallback**
+- [x] **2. Gemini Structured Quote Extraction and Resilient Fallback**
   Becomes usable: The backend endpoint `POST /api/analyze` parses messy multi-format merchant quotes into verified Pydantic objects and generates a counter-offer, seamlessly falling back to cached JSON on timeout or error.
   Why now: Tackles the primary technical unknown (Pydantic response schema with Gemini) early so the LLM pipeline is proven before building the visual UI.
   PRD ref: `prd.md > Features and Behavior > 2. Live Unstructured Quote Extraction & Strict Schema`, `5. Automated Counter-Offer Generator`, `7. Resilient Demo Fallback`

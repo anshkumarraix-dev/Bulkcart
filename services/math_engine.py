@@ -1,9 +1,16 @@
 import json
 import os
+import sys
 from typing import List, Dict, Tuple
+
+# Ensure project root is in sys.path
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from models import MerchantQuote, MerchantAudit
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 
 def load_benchmarks() -> Tuple[dict, dict]:
     with open(os.path.join(DATA_DIR, "mandi_benchmark.json"), "r", encoding="utf-8") as f:

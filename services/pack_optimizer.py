@@ -1,4 +1,12 @@
+import os
+import sys
 from typing import List, Tuple
+
+# Ensure project root is in sys.path
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from models import PackPlanItem
 
 def solve_pack_combination(demand: int, pack_sizes: List[int]) -> Tuple[List[Tuple[int, int]], int, int]:
@@ -17,7 +25,6 @@ def solve_pack_combination(demand: int, pack_sizes: List[int]) -> Tuple[List[Tup
     min_waste = float('inf')
     min_total_sacks = float('inf')
     
-    # Simple search over combinations of the largest pack
     largest = sorted_packs[0]
     max_largest = (demand // largest) + 2
     
@@ -33,7 +40,6 @@ def solve_pack_combination(demand: int, pack_sizes: List[int]) -> Tuple[List[Tup
                     current_breakdown.append((c, p))
                     delivered += c * p
                     remaining -= c * p
-            # If still remaining, add one smallest pack to cover
             if remaining > 0:
                 smallest = sorted_packs[-1]
                 current_breakdown.append((1, smallest))
@@ -64,7 +70,6 @@ def optimize_demand_packs(demand_dict: dict, merchant_items: List) -> List[PackP
     """
     plans = []
     
-    # Default fallbacks if quotes omit pack sizes
     default_packs = {
         "rice": [25, 10],
         "atta": [25, 10],
@@ -77,12 +82,14 @@ def optimize_demand_packs(demand_dict: dict, merchant_items: List) -> List[PackP
         "oil": "L"
     }
 
-    # Extract offered pack sizes per item from quotes
     offered_packs = {}
-    for item in merchant_items:
-        normalized = item.item_name.lower().strip()
-        if item.pack_sizes_offered:
-            offered_packs[normalized] = item.pack_sizes_offered
+    if merchant_items:
+        for item in merchant_items:
+            norm_name = getattr(item, "item_name", "") or ""
+            normalized = norm_name.lower().strip()
+            pack_sizes = getattr(item, "pack_sizes_offered", None)
+            if pack_sizes:
+                offered_packs[normalized] = pack_sizes
             
     for item_key, demand_val in demand_dict.items():
         packs = offered_packs.get(item_key, default_packs.get(item_key, [25]))
@@ -91,7 +98,6 @@ def optimize_demand_packs(demand_dict: dict, merchant_items: List) -> List[PackP
         
         breakdown, total_delivered, waste = solve_pack_combination(demand_val, packs)
         
-        # Format string e.g. "28 × 25 kg + 1 × 10 kg bags"
         parts = [f"{count} × {size} {unit_label}" for count, size in breakdown if count > 0]
         breakdown_str = " + ".join(parts) + f" {container_word}" if parts else f"{demand_val} {unit_label}"
         

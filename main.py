@@ -1,5 +1,12 @@
 import json
 import os
+import sys
+
+# Ensure project root is in sys.path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -18,7 +25,6 @@ load_dotenv()
 
 app = FastAPI(title="Neighborhood Buying Agent API", version="1.0.0")
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
@@ -115,4 +121,9 @@ def analyze_quotes(req: AnalyzeRequest):
         quotes=extraction.quotes,
         counter_offer_draft=extraction.counter_offer_draft
     )
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+
 

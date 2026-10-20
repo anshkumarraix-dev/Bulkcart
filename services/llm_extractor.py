@@ -1,11 +1,18 @@
 import json
 import os
+import sys
 from typing import Dict, Tuple
+
+# Ensure project root is in sys.path
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from google import genai
 from google.genai import types
 from models import ExtractionResponse, MerchantQuote
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 
 def get_cached_fallback(is_edited: bool = False) -> ExtractionResponse:
     fallback_file = os.path.join(DATA_DIR, "cached_fallback.json")
@@ -14,7 +21,7 @@ def get_cached_fallback(is_edited: bool = False) -> ExtractionResponse:
     quotes = [MerchantQuote(**q) for q in data["quotes"]]
     return ExtractionResponse(
         quotes=quotes,
-        counter_offer_draft=data["counter_offer_draft"]
+        counter_offer_draft=data.get("counter_offer_draft", "")
     )
 
 def extract_merchant_quotes(
@@ -81,7 +88,10 @@ Your task:
 """
 
     try:
-        client = genai.Client(api_key=api_key)
+        # Configure client with timeout in milliseconds
+        http_options = types.HttpOptions(timeout=int(timeout_sec * 1000))
+        client = genai.Client(api_key=api_key, http_options=http_options)
+        
         response = client.models.generate_content(
             model=model_name,
             contents=prompt,
@@ -92,8 +102,21 @@ Your task:
             )
         )
         
-        parsed: ExtractionResponse = response.parsed
+        parsed = getattr(response, "parsed", None)
+        if not parsed and hasattr(response, "text") and response.text:
+            try:
+                parsed = ExtractionResponse.model_validate_json(response.text)
+            except Exception as pe:
+                print(f"[LLM Extractor] JSON validation failed: {pe}")
+                
         if parsed and parsed.quotes:
+            # Clean up any None lists in items
+            for q in parsed.quotes:
+                for item in q.items:
+                    if item.pack_sizes_offered is None:
+                        item.pack_sizes_offered = []
+                    if item.price_per_pack is None:
+                        item.price_per_pack = []
             return parsed, False, is_edited
         else:
             print("[LLM Extractor] Gemini response parsing empty; falling back to cached.")
