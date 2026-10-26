@@ -16,7 +16,6 @@
 
 - [The Problem & Impact](#-the-problem--real-world-impact)
 - [How Bulkcart Works](#-how-bulkcart-works)
-- [60-Second Interactive Demo Guide](#-60-second-interactive-demo-guide)
 - [System Architecture](#-system-architecture)
 - [Tech Stack](#-tech-stack)
 - [Quick Start & Local Setup](#-quick-start--local-setup)
@@ -59,27 +58,6 @@ flowchart LR
     G --> H
     H --> I["Pakka Bill Slip<br/>Perforated Receipt + Counter-Offer"]
 ```
-
----
-
-## 🎬 60-Second Interactive Demo Guide
-
-Experience the entire proof of concept in four simple steps:
-
-1. **Launch the Dashboard:** Open `http://127.0.0.1:8000` in your browser. You will be greeted by the authentic **Retro Kirana** interface (cream parchment paper, Rozha One typography, and tabular figures).
-2. **Click `[📦 Load Sample Round]`:** 
-   - Populates 26 verified household demand orders from Gulmohar Enclave RWA (710 kg Sona Masoori Rice, 425 kg Sharbati Atta, 150 L Sunflower Oil).
-   - Loads 3 real-world merchant chat quotes from local mandis (Bharat Traders, Kisan Wholesale, Krishna Traders).
-3. **Click `[🔍 Analyze Quotes]`:**
-   - Watch the live 4-step progress checklist tick through: *Normalizing demand $\rightarrow$ Extracting quotes $\rightarrow$ Auditing against Mandi rates $\rightarrow$ Computing zero-waste sacks*.
-   - View the live **Quote Verdict Table** displaying headline savings (**₹16,245 / 18.7% savings** vs retail), per-household dividend (**₹624.81**), and rubber-stamp badges.
-   - Inspect the **Commercial Pack Plan** showing exact sack allocations with **0 kg waste**.
-4. **Click `[📜 Approve & Send]`:**
-   - The screen transitions to an animated, perforated **Pakka Bill** receipt slip with rolling counter ticker and green "SENT" stamp.
-   - Click `[📋 Copy Counter-Offer]` to copy the polite Hindi negotiation message ready for WhatsApp dispatch.
-   - Click `[↺ Start a New Round]` to reset cleanly.
-
----
 
 ## 🏗️ System Architecture
 
