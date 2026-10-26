@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulkcart — Code Tour & Interactive App Map</title>
+  <style>
+    :root {
+      --bg: #fcfbf7;
+      --card-bg: #ffffff;
+      --ink: #1f1d1a;
+      --muted: #5e584f;
+      --border: #e3ded5;
+      --accent: #b84319;
+      --accent-light: #fbeee8;
+      --badge-sahi: #1e7041;
+      --badge-sahi-bg: #eaf6ee;
+      --code-bg: #f5f2eb;
+      --font-serif: "Rozha One", Georgia, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "Space Mono", Consolas, Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    header {
+      border-bottom: 2px dashed var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      background: var(--accent-light);
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    p.subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    section { margin-bottom: 2.5rem; }
+    h2 {
+      font-size: 1.35rem;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    h2::before {
+      content: "§";
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Diagram */
+    .diagram-wrap {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-align: center;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Route cards */
+    .route-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 1rem;
+    }
+    .route-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+    .route-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .route-file {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: var(--code-bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+    }
+    .route-desc {
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    code {
+      font-family: var(--font-mono);
+      background: var(--code-bg);
+      padding: 0.15rem 0.35rem;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
+    /* Details collapsible */
+    details {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.85rem 1.25rem;
+      margin-bottom: 0.85rem;
+    }
+    summary {
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+    }
+    details[open] summary {
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+
+    /* Snapshot & Run Box */
+    .run-box {
+      background: #1e1e1e;
+      color: #f0f0f0;
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      overflow-x: auto;
+      margin-top: 0.5rem;
+    }
+    .meta-box {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <span class="badge">Architecture & Learning Wrap-Up</span>
+    <h1>Bulkcart — Visual App Map</h1>
+    <p class="subtitle">An architectural blueprint connecting real user actions, codebase pathways, and deterministic AI design patterns.</p>
+  </header>
+
+  <!-- 1. System Overview -->
+  <section>
+    <h2>1. System Overview</h2>
+    <p><strong>Bulkcart</strong> is an AI neighborhood buying agent built for residential societies (RWAs). It aggregates disparate grocery demand across 26+ households, extracts messy multilingual merchant quotes using Google Gemini with structured Pydantic schemas, runs a deterministic Mandi price audit, calculates zero-waste commercial pack distributions, and generates an animated Pakka Bill receipt with counter-offer negotiation text.</p>
+  </section>
+
+  <!-- 2. End-to-End Visual Action Route -->
+  <section>
+    <h2>2. Interactive Action Flow</h2>
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 760 170" xmlns="http://www.w3.org/2000/svg">
+        <!-- Node 1: Household Input -->
+        <rect x="10" y="25" width="130" height="60" rx="6" fill="#fbeee8" stroke="#b84319" stroke-width="2"/>
+        <text x="75" y="50" text-anchor="middle" font-weight="bold" font-size="12" fill="#1f1d1a">1. Consolidated</text>
+        <text x="75" y="68" text-anchor="middle" font-size="11" fill="#5e584f">26 Households</text>
+
+        <!-- Arrow 1 -> 2 -->
+        <path d="M 140 55 L 180 55" stroke="#b84319" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- Node 2: Gemini LLM Extractor -->
+        <rect x="180" y="25" width="150" height="60" rx="6" fill="#ffffff" stroke="#1f1d1a" stroke-width="1.5"/>
+        <text x="255" y="48" text-anchor="middle" font-weight="bold" font-size="12" fill="#1f1d1a">2. Gemini Extractor</text>
+        <text x="255" y="66" text-anchor="middle" font-size="10" fill="#5e584f">Structured Quotes</text>
+
+        <!-- Arrow 2 -> 3 -->
+        <path d="M 330 55 L 370 55" stroke="#1f1d1a" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- Node 3: Deterministic Math Engine -->
+        <rect x="370" y="25" width="150" height="60" rx="6" fill="#ffffff" stroke="#1f1d1a" stroke-width="1.5"/>
+        <text x="445" y="48" text-anchor="middle" font-weight="bold" font-size="12" fill="#1f1d1a">3. Mandi Math Audit</text>
+        <text x="445" y="66" text-anchor="middle" font-size="10" fill="#5e584f">Pack & Savings Math</text>
+
+        <!-- Arrow 3 -> 4 -->
+        <path d="M 520 55 L 560 55" stroke="#1f1d1a" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- Node 4: Pakka Bill & Counter Offer -->
+        <rect x="560" y="25" width="180" height="60" rx="6" fill="#eaf6ee" stroke="#1e7041" stroke-width="2"/>
+        <text x="650" y="48" text-anchor="middle" font-weight="bold" font-size="12" fill="#1e7041">4. Pakka Bill Slip</text>
+        <text x="650" y="66" text-anchor="middle" font-size="10" fill="#1e7041">Hindi/English Counter-Offer</text>
+
+        <!-- Legend / Fallback Branch below -->
+        <path d="M 255 85 L 255 125 L 370 125" stroke="#999" stroke-width="1.5" stroke-dasharray="4"/>
+        <rect x="370" y="105" width="150" height="40" rx="4" fill="#f5f2eb" stroke="#bbb" stroke-width="1"/>
+        <text x="445" y="125" text-anchor="middle" font-size="10" fill="#5e584f">Cached Fallback Store</text>
+        <text x="445" y="138" text-anchor="middle" font-size="9" fill="#888">Zero-Failure Reliability</text>
+
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#1f1d1a"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 3. Guided Route: 4 Stops Through the Code -->
+  <section>
+    <h2>3. 4-Stop Code Tour & Implementation Route</h2>
+
+    <div class="route-card">
+      <div class="route-header">
+        <span class="route-title">Stop 1: Demand Aggregation & Sample Round</span>
+        <span class="route-file">main.py / data/households.json</span>
+      </div>
+      <p class="route-desc"><strong>What happens:</strong> Clicking <em>"Load Sample Round"</em> in the UI fetches <code>/api/sample-round</code>. The endpoint parses <code>data/households.json</code>, aggregating 26 household staple requests (710 kg Rice, 425 kg Atta, 150 L Oil) with raw merchant chat quotes.</p>
+      <p class="route-desc"><strong>Anchor Symbol:</strong> <code>get_sample_round()</code> in <code>main.py</code></p>
+    </div>
+
+    <div class="route-card">
+      <div class="route-header">
+        <span class="route-title">Stop 2: LLM Quote Extraction & Fallback Safety</span>
+        <span class="route-file">services/llm_extractor.py</span>
+      </div>
+      <p class="route-desc"><strong>What happens:</strong> Messy quotes written in Hinglish, broken English, and shorthand are parsed into strictly typed Pydantic models (<code>ExtractionResponse</code>) using Gemini 2.5 Flash. If an API key is missing, network fails, or timeout occurs (&gt;10s), it transparently yields <code>data/cached_fallback.json</code> without breaking the demo.</p>
+      <p class="route-desc"><strong>Anchor Symbol:</strong> <code>extract_merchant_quotes()</code></p>
+    </div>
+
+    <div class="route-card">
+      <div class="route-header">
+        <span class="route-title">Stop 3: Mandi Benchmarks & Pack Optimizer</span>
+        <span class="route-file">services/math_engine.py &amp; pack_optimizer.py</span>
+      </div>
+      <p class="route-desc"><strong>What happens:</strong> Zero LLM hallucination for numbers. Deterministic Python calculates total retail cost (₹87,020), identifies the lowest verified bidder (₹70,775), stamps 3-state badges (<code>SAHI BHAV</code>, <code>MEHENGA</code>, <code>SAVDHAN</code>), and solves commercial sack distribution with exact 0 kg waste (e.g., 28×25kg + 1×10kg bags).</p>
+      <p class="route-desc"><strong>Anchor Symbol:</strong> <code>evaluate_merchant_quotes()</code> and <code>optimize_demand_packs()</code></p>
+    </div>
+
+    <div class="route-card">
+      <div class="route-header">
+        <span class="route-title">Stop 4: Retro Kirana UI &amp; Pakka Bill Slip</span>
+        <span class="route-file">static/index.html &amp; static/app.js</span>
+      </div>
+      <p class="route-desc"><strong>What happens:</strong> Single-page dashboard themed like an authentic Indian Kirana shop with Rozha One typography, rubber-stamp animations, and live counter ticker. Clicking <em>"Approve and send"</em> renders a perforated Pakka Bill receipt with rolling savings (₹16,245) and 1-click counter-offer copy to clipboard.</p>
+      <p class="route-desc"><strong>Anchor Symbol:</strong> <code>renderPakkaBill()</code> in <code>static/app.js</code></p>
+    </div>
+  </section>
+
+  <!-- 4. Quick Customization Anchors -->
+  <section>
+    <h2>4. "To Change This, Start Here"</h2>
+    <details>
+      <summary>Add a new commodity (e.g., Dal / Pulses)</summary>
+      <p style="margin-top: 0.5rem;">Update <code>data/mandi_benchmark.json</code> and <code>data/retail_baseline.json</code> with wholesale/retail rates. In <code>models.py</code>, extend <code>QuoteItem</code> or <code>DemandItem</code>, then add sample demand in <code>data/households.json</code>.</p>
+    </details>
+
+    <details>
+      <summary>Adjust Mandi Markup Thresholds for Badges</summary>
+      <p style="margin-top: 0.5rem;">Edit <code>services/math_engine.py</code> lines 45–60: adjust tolerance percentage above Mandi rate for <code>SAHI BHAV</code> (&lt;=15%), <code>MEHENGA</code> (15–30%), or <code>SAVDHAN</code> (&gt;30%).</p>
+    </details>
+
+    <details>
+      <summary>Modify the Negotiation Counter-Offer Prompt</summary>
+      <p style="margin-top: 0.5rem;">Inspect <code>EXTRACTION_PROMPT</code> in <code>services/llm_extractor.py</code>. Adjust tone, language preferences (Hindi, Hinglish, English), or payment term requests.</p>
+    </details>
+  </section>
+
+  <!-- 5. Reusable Practice -->
+  <section>
+    <h2>5. A Practice to Reuse: Deterministic Math + Structured AI Boundary</h2>
+    <p>A core challenge in agentic AI development is preventing hallucinations in high-stakes domain calculations (financial ledgers, packaging quantities, contract totals). In <strong>Bulkcart</strong>, the LLM is restricted solely to unstructured semantic extraction (parsing messy WhatsApp text into typed Pydantic objects). All calculations—benchmark variance, savings percentages, per-household splits, and sack combinations—are strictly handled by pure deterministic Python functions.</p>
+    <p style="margin-top: 0.5rem;"><strong>Takeaway for future projects:</strong> Never ask the LLM to do arithmetic in the prompt. Use the model to normalize unstructured human input into structured schemas, and let deterministic code do the math.</p>
+  </section>
+
+  <!-- 6. How to Run & Snapshot Reference -->
+  <section>
+    <h2>6. How to Run &amp; Reproduce</h2>
+    <div class="run-box">
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. (Optional) Set your Gemini API key in .env
+# GEMINI_API_KEY=your_key_here
+
+# 3. Launch Bulkcart local server
+uvicorn main:app --host 127.0.0.1 --port 8000
+
+# 4. Open in browser:
+# http://127.0.0.1:8000
+    </div>
+
+    <div class="meta-box">
+      <strong>Snapshot Reference:</strong> Generated for commit <code>d203057</code> (verified working with Slice 1 &amp; Slice 2 automated unit test suites).
+    </div>
+  </section>
+</div>
+
+</body>
+</html>

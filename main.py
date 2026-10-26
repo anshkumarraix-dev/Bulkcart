@@ -23,7 +23,7 @@ from services.pack_optimizer import optimize_demand_packs
 # Load environment variables
 load_dotenv()
 
-app = FastAPI(title="Neighborhood Buying Agent API", version="1.0.0")
+app = FastAPI(title="Bulkcart - AI Neighborhood Buying Agent API", version="1.0.0")
 
 DATA_DIR = os.path.join(BASE_DIR, "data")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
@@ -37,7 +37,7 @@ def serve_index():
 
 @app.get("/api/health")
 def health_check():
-    return {"status": "ok", "app": "Neighborhood Buying Agent"}
+    return {"status": "ok", "app": "Bulkcart - AI Neighborhood Buying Agent"}
 
 @app.get("/api/sample-round", response_model=SampleRoundResponse)
 def get_sample_round():
