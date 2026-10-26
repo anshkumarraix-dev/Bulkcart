@@ -79,6 +79,14 @@ Experience the entire proof of concept in four simple steps:
    - Click `[📋 Copy Counter-Offer]` to copy the polite Hindi negotiation message ready for WhatsApp dispatch.
    - Click `[↺ Start a New Round]` to reset cleanly.
 
+### 🎥 Official Demo Video & Voiceover Narration
+
+- **Demo Video (MP4, Full HD 1080p, 2m 03s):** [static/bulkcart_demo_video.mp4](static/bulkcart_demo_video.mp4)
+- **Audio Voiceover Track (WAV):** [static/bulkcart_voiceover.wav](static/bulkcart_voiceover.wav)
+- **Captured Demo Frame Sequence:** [static/demo_frames/](static/demo_frames/)
+
+> The demo video runs for **2 minutes and 3 seconds** (well within the hackathon's 3-minute limit), demonstrating end-to-end functionality from consolidated demand aggregation to the animated Pakka Bill receipt.
+
 ---
 
 ## 🏗️ System Architecture
