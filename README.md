@@ -49,15 +49,15 @@ Bulkcart bridges the gap between urban residential demand and wholesale Mandi su
 
 ```mermaid
 flowchart LR
-    A[26 Household Orders\nRice: 710kg | Atta: 425kg | Oil: 150L] --> B[Consolidated Demand]
-    C[Unstructured Merchant Quotes\nEnglish / Hindi / Hinglish] --> D[Gemini 2.5 Flash\nPydantic Extraction Engine]
-    B --> E[Deterministic Math Engine]
+    A["26 Household Orders<br/>Rice: 710kg • Atta: 425kg • Oil: 150L"] --> B["Consolidated Demand"]
+    C["Unstructured Merchant Quotes<br/>English / Hindi / Hinglish"] --> D["Gemini 2.5 Flash<br/>Pydantic Extraction Engine"]
+    B --> E["Deterministic Math Engine"]
     D --> E
-    E --> F[Mandi Price Audit\nSAHI BHAV / MEHENGA Badges]
-    E --> G[Zero-Waste Pack Optimizer\nExact Commercial Sack Solver]
-    F --> H[Retro Kirana Dashboard]
+    E --> F["Mandi Price Audit<br/>SAHI BHAV / MEHENGA Badges"]
+    E --> G["Zero-Waste Pack Optimizer<br/>Exact Commercial Sack Solver"]
+    F --> H["Retro Kirana Dashboard"]
     G --> H
-    H --> I[Pakka Bill Slip\nPerforated Receipt + Counter-Offer]
+    H --> I["Pakka Bill Slip<br/>Perforated Receipt + Counter-Offer"]
 ```
 
 ---
